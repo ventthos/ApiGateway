@@ -1,5 +1,5 @@
 # 1️⃣ Imagen base con Java 17
-FROM eclipse-temurin:17-jdk-jammy
+FROM eclipse-temurin:21-jdk-jammy
 
 # 2️⃣ Carpeta de trabajo dentro del contenedor
 WORKDIR /app
