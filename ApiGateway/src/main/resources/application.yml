@@ -1,0 +1,32 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        - id: ordenes-route
+          uri: lb://ordenservice
+          predicates:
+            - Path=/ordenes/**
+
+        - id: pagos-route
+          uri: lb://pagos-service
+          predicates:
+            - Path=/pagos/**
+
+        - id: productos-route
+          uri: lb://productservice
+          predicates:
+              - Path=/productos/**
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server:8761/eureka
+    register-with-eureka: true
+    fetch-registry: true
+  instance:
+    prefer-ip-address: true
