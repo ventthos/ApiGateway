@@ -6,19 +6,34 @@ spring:
     name: api-gateway
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins:
+              - "http://localhost:5173"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
       routes:
         - id: ordenes-route
-          uri: lb://ordenservice
+          uri: lb://ordenes-service
           predicates:
             - Path=/ordenes/**
-
+        - id: envios-route
+          uri: lb://ordenes-service
+          predicates:
+            - Path=/envios/**
         - id: pagos-route
           uri: lb://pagos-service
           predicates:
             - Path=/pagos/**
 
         - id: productos-route
-          uri: lb://productservice
+          uri: lb://product-service
           predicates:
               - Path=/productos/**
 
